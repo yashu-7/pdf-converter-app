@@ -1,5 +1,3 @@
-# requirements.txt
-
 Flask
 pypdf
 pdf2docx
