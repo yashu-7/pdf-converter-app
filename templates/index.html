@@ -1,0 +1,48 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileFlow - The Ultimate File Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+</head>
+<body>
+    <header class="main-header">
+        <h1>🌊 FileFlow</h1>
+        <div class="theme-switcher">
+            <span>Light</span>
+            <input type="checkbox" id="theme-toggle" class="toggle">
+            <label for="theme-toggle" class="toggle-label"></label>
+            <span>Dark</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <p class="subtitle">Your fast, simple, and secure file conversion toolkit. Choose a tool below.</p>
+        
+        <div class="tool-grid">
+            {% for tool_id, tool_data in tools.items() %}
+            <a href="{{ url_for('tool_page', tool_name=tool_id) }}" class="card">
+                <div class="card-icon">{{ tool_data.icon }}</div>
+                <h3>{{ tool_data.title }}</h3>
+                <p>{{ tool_data.description }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <form id="feedback-form" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+             <h3>💡 Got Feedback? Help us improve!</h3>
+            <textarea name="feedback" placeholder="I love this app, but I wish it could..." required></textarea>
+            <button type="submit">Send Feedback</button>
+            <div id="feedback-status"></div>
+        </form>
+        <p>Made with ❤️ using Flask & Vanilla JS</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
