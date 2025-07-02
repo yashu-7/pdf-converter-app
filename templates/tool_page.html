@@ -1,0 +1,51 @@
+<!-- templates/tool_page.html (FIXED & IMPROVED) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tool.title }} - FileFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+</head>
+<body>
+    <header class="main-header">
+        <h1>🌊 FileFlow</h1>
+        <div class="theme-switcher">
+            <span>Light</span>
+            <input type="checkbox" id="theme-toggle" class="toggle">
+            <label for="theme-toggle" class="toggle-label"></label>
+            <span>Dark</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="{{ url_for('home') }}" class="back-link">← Back to all tools</a>
+        <h2>{{ tool.icon }} {{ tool.title }}</h2>
+        <p class="tool-description">{{ tool.description }}</p>
+
+        <form id="upload-form" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="tool_id" value="{{ tool_id }}">
+            
+            <!-- This label is the key to the fix. Clicking it will now trigger the file input. -->
+            <label for="file-input" class="file-drop-zone">
+                <div class="upload-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                </div>
+                <p>Drag & drop files here, or <span class="browse-link">Browse files</span></p>
+                <input type="file" name="files[]" id="file-input" class="file-input-hidden" {% if 'merger' in tool_id %}multiple{% endif %}>
+            </label>
+
+            <ul id="file-list"></ul>
+            
+            <button type="submit" id="submit-button" disabled>Convert Files</button>
+        </form>
+
+        <div id="result-area" class="hidden">
+            <div id="status-message"></div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
