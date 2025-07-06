@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FileFlow - The Ultimate File Converter{% endblock %}</title>
+    <meta name="description" content="{% block description %}A free and simple online toolkit to merge, split, and convert your files. Fast, secure, and easy to use.{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+    
+    <!-- Google Analytics Snippet (Secure) -->
+    <!-- This block only renders if the ga_id variable exists -->
+    {% if ga_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_id }}');
+    </script>
+    {% endif %}
+    <!-- End Google Analytics -->
+
+    <!-- This block allows specific pages (like tool_page) to add extra scripts to the head -->
+    {% block head_scripts %}{% endblock %}
+</head>
+<body>
+    <header class="main-header">
+        <h1>🌊 FileFlow</h1>
+        <div class="theme-switcher">
+            <span>Light</span>
+            <input type="checkbox" id="theme-toggle" class="toggle">
+            <label for="theme-toggle" class="toggle-label"></label>
+            <span>Dark</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- The unique content of each page will be injected here -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <!-- Formspree Form (Secure) -->
+        <!-- This form only renders if the formspree_url variable exists -->
+        {% if formspree_url %}
+        <form id="feedback-form" action="{{ formspree_url }}" method="POST">
+             <h3>💡 Got Feedback? Help us improve!</h3>
+            <textarea name="feedback" placeholder="I love this app, but I wish it could..." required></textarea>
+            <button type="submit">Send Feedback</button>
+            <div id="feedback-status"></div>
+        </form>
+        {% endif %}
+
+        <p>Made with ❤️</p>
+        <p class="footer-privacy-text">Your privacy is our priority. All files are processed and deleted immediately.</p>
+    </footer>
+
+    <!-- Your main JS file, loaded on every page -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
