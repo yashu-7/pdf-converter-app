@@ -1,81 +1,37 @@
-<!-- templates/index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FileFlow - The Ultimate File Converter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
-    <meta name="description" content="A free and simple online toolkit to merge, split, and convert your files. Fast, secure, and easy to use.">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9VV6NBCB6"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+{% extends "base.html" %}
 
-          gtag('config', 'G-W9VV6NBCB6');
-    </script>
-</head>
-<body>
-    <header class="main-header">
-        <h1>🌊 FileFlow</h1>
-        <div class="theme-switcher">
-            <span>Light</span>
-            <input type="checkbox" id="theme-toggle" class="toggle">
-            <label for="theme-toggle" class="toggle-label"></label>
-            <span>Dark</span>
-        </div>
-    </header>
-
-    <main class="container">
-        <h2>The All-in-One File Toolkit</h2>
-        <p class="subtitle">Your fast, simple, and secure file conversion toolkit. Choose a tool below.</p>
-        
-        <div class="tool-grid">
-            <a href="/pdf-merger" class="card">
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6v11.25m10.5-11.25h.375c.621 0 1.125.504 1.125 1.125V18a1.125 1.125 0 0 1-1.125 1.125h-9.75A1.125 1.125 0 0 1 6 18V6.375a1.125 1.125 0 0 1 1.125-1.125h.375m10.5-1.125H6.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V6.375c0-.621-.504-1.125-1.125-1.125Z" /></svg>
-                    <h3>PDF Merger</h3>
-                </div>
-                <p>Combine multiple PDFs into one document.</p>
-            </a>
-            <a href="/split-pdf" class="card">
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9.568 3.075A12.001 12.001 0 0 1 12 3c1.693 0 3.32.355 4.803.996m-9.606 0A12.005 12.005 0 0 0 3 12c0 1.693.355 3.32.996 4.803M14.431 16.925A12.005 12.005 0 0 0 12 21c-1.693 0-3.32-.355-4.803-.996M18.995 9.197A12.005 12.005 0 0 1 21 12c0 1.693-.355 3.32-.996 4.803M4.004 9.197A12.005 12.005 0 0 0 3 12c0 1.693.355 3.32.996 4.803M12 3v18M3 12h18" /></svg>
-                    <h3>Split PDF</h3>
-                </div>
-                <p>Split a single PDF into separate pages or at a specific page.</p>
-            </a>
-            <a href="/pdf-to-word" class="card">
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
-                    <h3>PDF to Word</h3>
-                </div>
-                <p>Convert a PDF to an editable .docx file.</p>
-            </a>
-            <a href="/pdf-to-ppt" class="card">
-                <div class="card-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 13.5h6m-6 4.5h6m-6-9h6m0 9H9.528c-.552 0-.997-.445-1.01-1.002L8.5 3.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v3.75m0 0H18.5a.75.75 0 0 1 .53.22l2.22 2.22a.75.75 0 0 1 0 1.06l-2.22 2.22a.75.75 0 0 1-.53.22H12.75m-3.75 0h-1.5a.75.75 0 0 1-.75-.75V3.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v13.5Z" /></svg>
-                    <h3>PDF to PowerPoint</h3>
-                </div>
-                <p>Convert a PDF into a .pptx presentation.</p>
-            </a>
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <form id="feedback-form" action="https://formspree.io/f/xkgbeobb" method="POST">
-             <h3>💡 Got Feedback? Help us improve!</h3>
-            <textarea name="feedback" placeholder="I love this app, but I wish it could..." required></textarea>
-            <button type="submit">Send Feedback</button>
-            <div id="feedback-status"></div>
-        </form>
-        <p>Made with ❤️</p>
-        <p class="footer-privacy-text">Your privacy is our priority. All files are processed and deleted immediately.</p>
-    </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+{% block content %}
+    <h2>The All-in-One File Toolkit</h2>
+    <p class="subtitle">Your fast, simple, and secure file conversion toolkit. Choose a tool below.</p>
+    
+    <div class="tool-grid">
+        <a href="/pdf-merger" class="card">
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6v11.25m10.5-11.25h.375c.621 0 1.125.504 1.125 1.125V18a1.125 1.125 0 0 1-1.125 1.125h-9.75A1.125 1.125 0 0 1 6 18V6.375a1.125 1.125 0 0 1 1.125-1.125h.375m10.5-1.125H6.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V6.375c0-.621-.504-1.125-1.125-1.125Z" /></svg>
+                <h3>PDF Merger</h3>
+            </div>
+            <p>Combine multiple PDFs into one document.</p>
+        </a>
+        <a href="/split-pdf" class="card">
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9.568 3.075A12.001 12.001 0 0 1 12 3c1.693 0 3.32.355 4.803.996m-9.606 0A12.005 12.005 0 0 0 3 12c0 1.693.355 3.32.996 4.803M14.431 16.925A12.005 12.005 0 0 0 12 21c-1.693 0-3.32-.355-4.803-.996M18.995 9.197A12.005 12.005 0 0 1 21 12c0 1.693-.355 3.32-.996 4.803M4.004 9.197A12.005 12.005 0 0 0 3 12c0 1.693.355 3.32.996 4.803M12 3v18M3 12h18" /></svg>
+                <h3>Split PDF</h3>
+            </div>
+            <p>Split a single PDF into separate pages or at a specific page.</p>
+        </a>
+        <a href="/pdf-to-word" class="card">
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                <h3>PDF to Word</h3>
+            </div>
+            <p>Convert a PDF to an editable .docx file.</p>
+        </a>
+        <a href="/pdf-to-ppt" class="card">
+            <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 13.5h6m-6 4.5h6m-6-9h6m0 9H9.528c-.552 0-.997-.445-1.01-1.002L8.5 3.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v3.75m0 0H18.5a.75.75 0 0 1 .53.22l2.22 2.22a.75.75 0 0 1 0 1.06l-2.22 2.22a.75.75 0 0 1-.53.22H12.75m-3.75 0h-1.5a.75.75 0 0 1-.75-.75V3.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v13.5Z" /></svg>
+                <h3>PDF to PowerPoint</h3>
+            </div>
+            <p>Convert a PDF into a .pptx presentation.</p>
+        </a>
+    </div>
+{% endblock %}
