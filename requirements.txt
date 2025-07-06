@@ -4,3 +4,4 @@ pdf2docx
 PyMuPDF
 python-pptx
 gunicorn
+python-dotenv
